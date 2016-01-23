@@ -1,0 +1,17 @@
+/* This file includes all the variables, mixins, imports etc */
+
+@import 'compass';
+
+/* Colors */
+$red: #FBE4E4;
+$red-text: #C73344;
+$red-border: #C01A1b;
+
+$grey-color-light: #F6F8FC;
+$grey-border: #D5D5D7;
+$grey-text: #95959B;
+$grey: #EDF1F8;
+
+/* Units */
+$base-unit: 24px;
+$half-base-unit: $base-unit / 2;

@@ -1,3 +1,4 @@
+/*Require JS Config*/
 require.config({
 	paths: {
 		'angular': '../bower_components/angular/angular',
@@ -12,11 +13,12 @@ require.config({
 requirejs(['app', 'angular', 'controllers/ListController'], function (app, angular, ListController) {
 	'use strict';
 
+	/* Handle Routes */
 	app.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider.when('/', {
 			templateUrl: '/app/views/list.html',
 			controller: 'ListController'
-		}).otherwise({redirectTo : '/a'});
+		}).otherwise({redirectTo : '/'});
 	}]);
 
 	angular.bootstrap(document, ['buildTaskApp']);

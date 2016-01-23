@@ -1,1 +1,17 @@
-<div>{{list[0]}}</div>
+<div class="container">
+	<ul class="nav attributes-row">
+		<li ng-repeat="attribute in attributes">
+			{{ attribute }}
+		</li>
+	</ul>
+	<ul class="nav build-data" ng-repeat="build in buildData" ng-class="getBuildClassName(build.state)">
+		<li>{{ build.name }}</li>
+		<li>{{ build.owner }}</li>
+		<li>{{ build.timeStarted }}</li>
+		<li>{{ build.state }}</li>
+		<li>{{ build.metricsValue }}</li>
+		<li>{{ build.buildValue }}</li>
+		<li>{{ build.unitValue }}</li>
+		<li>{{ build.functionalValue }}</li>
+	</ul>
+</div>

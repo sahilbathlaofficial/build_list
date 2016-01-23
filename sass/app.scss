@@ -1,0 +1,44 @@
+@import 'base';
+
+
+ul.nav {
+	margin: 0;
+	padding: 0;
+	margin-bottom: $half-base-unit;
+	li {
+		display: table-cell;
+		width: $base-unit * 6;
+		max-width: $base-unit * 6;
+		overflow: hidden;
+	}
+	&.attributes-row {
+		margin-left: $half-base-unit;
+	}
+}
+
+
+.build-data li {
+	font-size: $half-base-unit;
+	padding: $half-base-unit 0;
+}
+
+.container {
+	min-width: 800px;
+	display: table;
+	font-family: sans-serif;
+	white-space: nowrap;
+	background-color: $grey-color-light;
+	padding: $half-base-unit;
+}
+
+.build-row--grey {
+	color: $grey-text;
+	border: 2px solid $grey-border;
+	background: $grey
+}
+
+.build-row--red {
+	color: $red-text;
+	border: 2px solid $red-border;
+	background: $red
+}
