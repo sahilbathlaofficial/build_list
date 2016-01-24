@@ -4,6 +4,7 @@
 			{{ attribute }}
 		</li>
 	</ul>
+	<!-- Start build data block -->
 	<ul class="nav build-data {{'build-row--' + getColor(build.state)}}" ng-repeat="build in buildData" ng-class="{ expanded: buildInfo.currentBuild === build, collapsed: buildInfo.currentBuild !== build }" ng-click="renderChart(build.id);buildInfo.currentBuild = buildInfo.currentBuild === build ? undefined : build">
 		<li>
 			<div class="build-type" ng-class="['build-type--' + getColor(build.state), build.type]"></div>
@@ -22,24 +23,25 @@
 		<ul class="nav expanded-details" ng-class="{ 'visible': buildInfo.currentBuild === build }">
 			<li class="state-description {{ build.metrics.colorCode }}-box">{{ build.metrics.title }}</li>
 			<li class="state-description {{ build.build.colorCode }}-box">{{ build.build.title }}</li>
-			<li class="state-description {{ build.unitTest.colorCode }}-box">
-				<div id="unitChartContainer{{ build.id }}" class="pie-chart-container"></div>
+			<!-- Start Unit Test Block -->
+			<li class="state-description {{ build[testType].colorCode }}-box" ng-repeat="testType in ['unitTest', 'functionalTest']">
+				<div id="{{testType}}ChartContainer{{ build.id }}" class="pie-chart-container"></div>
 				<div class="width-30 float-right wrap push-top--double">
-					<span class="headline-size">{{ build.unitTest.passedValue }} %</span>
+					<span class="headline-size">{{ build[testType].passedValue }} %</span>
 					<span class="color-black nano-font-size">Tests Passed</span>
 				</div>
-				<div>{{ build.unitTest.title }}</div>
+				<div>{{ build[testType].title }}</div>
 				<div class="test-progress">
 					<div class="code-coverage-details color-black float-right">
-						<div>{{ build.unitTest.coverageValue }}%</div>
+						<div>{{ build[testType].coverageValue }}%</div>
 						<div class="nano-font-size">code covered</div>
 					</div>
 					<svg width="160" ng-attr-height="{{ baseUnitValue }}">
-						<rect ng-attr-width="{{ build.unitTest.coverageValue * 2 }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#72AC4D;stroke-width:3;stroke:#72AC4D" />
+						<rect ng-attr-width="{{ build[testType].coverageValue * 2 }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#72AC4D;stroke-width:3;stroke:#72AC4D" />
 					</svg>
 				</div>
 			</li>
-			<li class="state-description {{ build.functionalTest.colorCode }}-box">{{ build.functionalTest.title }}</li>
+			<!-- End Unit Test Block -->
 			<li class="build-result">
 				<div class="color-black height-20">Result:</div>
 				<div class="height-20">Change {{ build.state }}</div>
@@ -49,4 +51,5 @@
 			</li>
 		</ul>
 	</ul>
+	<!-- End Build Data Block -->
 </div>

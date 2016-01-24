@@ -17,7 +17,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				metrics: { value: 0, colorCode: 'green', title: 'Metrics'},
 				build: { value: 0, colorCode: 'green', title: 'Build'},
 				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test', coverageValue: 0, passedValue: 0 },
-				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test'}
+				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test', coverageValue: 0, passedValue: 0 }
 			},
 			{
 				id: 2,
@@ -29,7 +29,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				metrics: { value: 0.5, colorCode: 'green', title: 'Metrics'},
 				build: { value: 0, colorCode: 'green', title: 'Build'},
 				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test', coverageValue: 0, passedValue: 0 },
-				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test'}
+				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test', coverageValue: 0, passedValue: 0 }
 			},
 			{
 				id: 3,
@@ -39,9 +39,9 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				timeStarted: '4/18/2014 10:53am',
 				state: StateEnum.REJECTED,
 				metrics: { value: -1, colorCode: 'red', title: 'Metrics'},
-				build: { value: 0, colorCode: 'green', title: 'Build'},
-				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test', coverageValue: 76, passedValue: 73 },
-				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test'}
+				build: { value: 1, colorCode: 'green', title: 'Build'},
+				unitTest: { value: 1, colorCode: 'green', title: 'Unit Test', coverageValue: 76, passedValue: 73 },
+				functionalTest: { value: 1, colorCode: 'green', title: 'Functional Test', coverageValue: 0, passedValue: 0 }
 			},
 			{
 				id: 4,
@@ -53,7 +53,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				metrics: { value: 1, colorCode: 'green', title: 'Metrics'},
 				build: { value: 1, colorCode: 'green', title: 'Build'},
 				unitTest: { value: 1, colorCode: 'green', title: 'Unit Test', coverageValue: 92, passedValue: 90 },
-				functionalTest: { value: 1, colorCode: 'green', title: 'Functional Test'}
+				functionalTest: { value: 1, colorCode: 'green', title: 'Functional Test', coverageValue: 99, passedValue: 92 }
 			}
 		]
 
@@ -92,37 +92,38 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				'#EB7D3B'
 			]);
 
-			var chart = new CanvasJS.Chart('unitChartContainer' + id,
-			{
-				colorSet: 'customColorSet',
-				animationEnabled: true,
-				legend: {
-					verticalAlign: 'top',
-					horizontalAlign: 'left'
-				},
-				height: 120,
-				backgroundColor: null,
-				margin: 0,
-				data: [
-					{
-						type: 'pie',
-						indexLabelFontFamily: 'Garamond',
-						indexLabelFontSize: 10,
-						indexLabelFontWeight: 'bold',
-						startAngle:40,
-						indexLabelFontColor: 'MistyRose',
-						indexLabelLineColor: 'darkgrey',
-						indexLabelPlacement: 'inside',
-						indexLabel: '#percent%',
-						showInLegened: true,
-						dataPoints: [
-							{  y: $scope.buildData[id - 1].unitTest.passedValue, name: 'Tests Passed'},
-							{  y: 100 - $scope.buildData[id - 1].unitTest.passedValue, name: 'Tests Failed'},
-						]
-					}
-				]
-			});
-			chart.render();
+			for (var i = 0, testTypes = ['unitTest', 'functionalTest']; i < testTypes.length; i++) {
+				var chart = new CanvasJS.Chart(testTypes[i] + 'ChartContainer' + id, {
+					colorSet: 'customColorSet',
+					animationEnabled: true,
+					legend: {
+						verticalAlign: 'top',
+						horizontalAlign: 'left'
+					},
+					height: 120,
+					backgroundColor: null,
+					margin: 0,
+					data: [
+						{
+							type: 'pie',
+							indexLabelFontFamily: 'Garamond',
+							indexLabelFontSize: 10,
+							indexLabelFontWeight: 'bold',
+							startAngle:40,
+							indexLabelFontColor: 'MistyRose',
+							indexLabelLineColor: 'darkgrey',
+							indexLabelPlacement: 'inside',
+							indexLabel: '#percent%',
+							showInLegened: true,
+							dataPoints: [
+								{  y: $scope.buildData[id - 1].unitTest.passedValue, name: 'Tests Passed'},
+								{  y: 100 - $scope.buildData[id - 1].unitTest.passedValue, name: 'Tests Failed'},
+							]
+						}
+					]
+				});
+				chart.render();
+			}
 		};
 	}
 
