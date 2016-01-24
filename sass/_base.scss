@@ -20,6 +20,8 @@ $green: #EEF3EC;
 $green-text: #548039;
 $green-border: #548039;
 
+$yellow: #FFD965;
+
 .red-box {
 	border: 2px solid $red-border;
 	color: $red-text;
@@ -28,6 +30,14 @@ $green-border: #548039;
 .green-box {
 	border: 2px solid $green-border;
 	color: $green-text;
+}
+
+.text--blue {
+	color: $blue-text;
+}
+
+.text--dark {
+	color: #000;
 }
 
 /* Units */

@@ -7,7 +7,7 @@
 	<ul class="nav build-data {{'build-row--' + getColor(build.state)}}" ng-repeat="build in buildData" ng-class="{ expanded: buildInfo.currentBuild === build, collapsed: buildInfo.currentBuild !== build }" ng-click="buildInfo.currentBuild = buildInfo.currentBuild === build ? undefined : build">
 		<li>
 			<div class="build-type" ng-class="['build-type--' + getColor(build.state), build.type]"></div>
-			<div class="soft">{{ build.name }}</div>
+			<div class="soft-half">{{ build.name }}</div>
 		</li>
 		<li>{{ build.owner }}</li>
 		<li>{{ build.timeStarted }}</li>
@@ -20,8 +20,55 @@
 			</svg>
 		</li>
 		<ul class="nav expanded-details" ng-class="{ 'visible': buildInfo.currentBuild === build }">
-			<li class="state-description {{ build.metrics.colorCode }}-box">{{ build.metrics.title }}</li>
-			<li class="state-description {{ build.build.colorCode }}-box">{{ build.build.title }}</li>
+			<li class="state-description {{ build.metrics.colorCode }}-box">
+				<div class="full-width">{{ build.metrics.title }}</div>
+
+				<div class="full-width" style="height:70px;">
+					<div class="float--left  one-half  soft-sides">
+						<div>
+							<div class="arrow-up"><h3>23</h3></div>
+						</div>
+						<div class="push-semi--top  float--left  text--dark">Test</div>
+					</div>
+
+					<div class="inline-block">
+						<div class="soft-semi--sides">
+							<div class="arrow-up"><h3>23</h3></div>
+						</div>
+						<div class="push-semi--top  text--dark">Maintainability</div>
+					</div>
+				</div>
+
+				<div class="full-width  soft-half--top" style="height:70px;">
+					<div class="float--left  one-half">
+						<div class="soft-half--sides">
+							<div class="arrow-right"><h3>23</h3></div>
+						</div>
+						<div class="push-quarter--top  text--dark">Security</div>
+					</div>
+					<div class="inline-block  one--half">
+						<div class="soft-sides">
+							<div class="arrow-right"><h3>23</h3></div>
+						</div>
+						<div class="push-quarter--top  text--dark">Workmanship</div>
+					</div>
+				</div>
+			</li>
+
+			<li class="state-description {{ build.build.colorCode }}-box">
+				<div class="full-width  push-quarter--bottom">{{ build.build.title }}</div>
+				<div class="push-half--top">
+					<div class="one-half  soft-sides  soft-half--top  float--left">
+						<div class="build-icon"></div>
+						<div class="text--blue  push-half--top">Debug</div>
+					</div>
+					<div class="one-half  inline-block">
+						<div class="build-icon"></div>
+						<div class="text--blue  push-half--top">Release</div>
+					</div>
+				</div>
+				<div class="text--center  push--top   text--dark">10:35A.M. - 12/12/2015</div>
+			</li>
 			<li class="state-description {{ build.unitTest.colorCode }}-box">{{ build.unitTest.title }}</li>
 			<li class="state-description {{ build.functionalTest.colorCode }}-box">{{ build.functionalTest.title }}</li>
 			<li class="build-result">
