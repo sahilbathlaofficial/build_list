@@ -30,6 +30,10 @@
 				</div>
 				<div>{{ build.unitTest.title }}</div>
 				<div class="test-progress">
+					<div class="code-coverage-details color-black float-right">
+						<div>{{ build.unitTest.coverageValue }}%</div>
+						<div class="nano-font-size">code covered</div>
+					</div>
 					<svg width="160" ng-attr-height="{{ baseUnitValue }}">
 						<rect ng-attr-width="{{ build.unitTest.coverageValue * 2 }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#72AC4D;stroke-width:3;stroke:#72AC4D" />
 					</svg>

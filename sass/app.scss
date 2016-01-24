@@ -109,3 +109,11 @@ ul.nav {
 	left: -1 * $base-unit;
 	top: $base-margin;
 }
+
+.code-coverage-details {
+	position: relative;
+	top: $half-base-unit/4;
+	left: $half-base-unit/2;
+	width: 50%;
+	text-align:center;
+}
