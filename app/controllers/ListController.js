@@ -68,7 +68,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				case StateEnum.RUNNING:
 					return 'blue';
 				case StateEnum.ACCEPTED:
-					return 'green';
+					return 'green_accepted';
 				case StateEnum.COMPLETED:
 					return 'green';
 			}

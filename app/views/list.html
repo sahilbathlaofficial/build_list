@@ -5,10 +5,10 @@
 		</li>
 	</ul>
 	<ul class="nav build-data {{'build-row--' + getColor(build.state)}}" ng-repeat="build in buildData" ng-class="{ expanded: buildInfo.currentBuild === build, collapsed: buildInfo.currentBuild !== build }" ng-click="buildInfo.currentBuild = buildInfo.currentBuild === build ? undefined : build">
-		<li class="build-type" ng-class="['build-type--' + getColor(build.state), build.type]">
-			<div ></div>
+		<li>
+			<div class="build-type" ng-class="['build-type--' + getColor(build.state), build.type]"></div>
+			<div class="soft">{{ build.name }}</div>
 		</li>
-		<li>{{ build.name }}</li>
 		<li>{{ build.owner }}</li>
 		<li>{{ build.timeStarted }}</li>
 		<li>{{ build.state }}</li>

@@ -50,14 +50,16 @@ $color-map: (
 	red: $red,
 	grey: $grey,
 	blue: $blue,
-	green: $green
+	green: $green,
+	green_accepted: $green
 );
 
 $text-color-map: (
 	red: $red-text,
 	grey: $grey-text,
 	blue: $blue-text,
-	green: $green-text
+	green: $green-text,
+	green_accepted: $green-text
 );
 
 $border-color-map: (
@@ -65,6 +67,7 @@ $border-color-map: (
 	grey: $grey-border,
 	blue: $blue-border,
 	green: $green-border,
+	green_accepted: $green-border
 );
 
 .color-black {
@@ -74,13 +77,13 @@ $border-color-map: (
 /*Mixins*/
 @mixin base-li-style {
 	display: inline-block;
-	width: $base-unit * 4;
+	width: 150px;
 	overflow: hidden;
 }
 
 @mixin state-box {
 	height: $base-unit * 5;
-	width: $base-unit * 5;
+	width: $base-unit * 6;
 	margin: $base-margin * 2;
 }
 

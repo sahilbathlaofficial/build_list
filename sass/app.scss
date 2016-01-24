@@ -5,11 +5,12 @@ ul.nav {
 	padding: 0;
 	li {
 		@include base-li-style;
-		&.step-progress {
+		text-align: center;
+		vertical-align: middle;
+		svg {
 			background-color: $grey-border;
 			width: $base-unit + $half-base-unit;
-			margin: $base-margin ($base-unit * 2 + $half-base-unit) 0 0;
-			height: $base-unit
+			margin-right: $half-base-unit;
 		}
 		&.state-description {
 			@include state-box;
@@ -24,13 +25,13 @@ ul.nav {
 		}
 	}
 	&.attributes-row {
-		margin-left: $base-unit * 2;
+		margin-left: 10px;
 	}
 	&.expanded-details {
 		opacity: 0;
 		/* hack to fix pointer events, can't use pointer-events due to browser compatability */
 		position: fixed;
-		bottom: 0px;
+		bottom: -200px;
 		&.visible {
 			@include transition-property(opacity);
 			@include transition-duration(2s);
@@ -52,20 +53,22 @@ ul.nav {
 		height: $base-unit + $half-base-unit;
 	}
 	li {
+		padding: 5px 0;
 		font-size: $medium-font-size;
-		margin: $base-margin 0;
-		&.build-type {
-			width: $base-unit;
-			margin: $base-margin;
-			border: 2px solid grey;
-			height: $half-base-unit;
+		.build-type {
+			width: 25px;
+			margin: 7px 10px;
+			height: 20px;
+			display: inline-block;
+    		float: left;
 		}
 	}
 }
 
 @each $color, $colorValue in $border-color-map {
 	.build-type--#{"" + $color} {
-		background-color: $colorValue;
+		background: url('/app/assets/images/' + $color + '-firewall.png') center center;
+		background-size: 100%;
 	}
 
 	.build-row--#{"" + $color} {
@@ -82,4 +85,8 @@ ul.nav {
 	white-space: nowrap;
 	background-color: $grey-color-light;
 	padding: $half-base-unit;
+}
+
+.soft {
+	padding: 10px;
 }
