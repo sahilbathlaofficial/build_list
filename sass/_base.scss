@@ -38,12 +38,24 @@ $half-base-unit: $base-unit / 2;
 $medium-font-size: $base-font-size - 2px;
 $milli-font-size: $medium-font-size - 2px;
 $micro-font-size: $milli-font-size - 2px;
+$nano-font-size: $micro-font-size - 2px;
+
+.headline-size {
+	font-size: $milli-font-size * 2;
+}
+
+.nano-font-size {
+	font-size: $nano-font-size;
+}
 
 /* Margins & Paddings */
 
 $base-margin: $half-base-unit / 2;
 $base-padding: $base-margin;
 
+.push-top--double {
+	margin-top: 2 * $base-unit;
+}
 
 /*Lists*/
 $color-map: (
@@ -90,4 +102,24 @@ $border-color-map: (
 /* Heights */
 .height-20 {
 	height: 20%;
+}
+
+/* Width */
+.width-30 {
+	width: 30%;
+}
+
+
+/* Float */
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+/* Word Wrap */
+.wrap {
+	white-space: initial;
 }

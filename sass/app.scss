@@ -7,7 +7,7 @@ ul.nav {
 		@include base-li-style;
 		text-align: center;
 		vertical-align: middle;
-		svg {
+		&.step-progress svg {
 			background-color: $grey-border;
 			width: $base-unit + $half-base-unit;
 			margin-right: $half-base-unit;
@@ -17,6 +17,7 @@ ul.nav {
 			@include box-shadow(rgba(black, 0.4) 2px 5px 10px);
 			padding: $base-padding;
 			font-weight: bold;
+			text-align: left;
 		}
 		&.build-result {
 			@include state-box;
@@ -89,4 +90,22 @@ ul.nav {
 
 .soft {
 	padding: 10px;
+}
+
+.canvasjs-chart-credit {
+	display: none;
+}
+
+.test-progress {
+	background-color: #F6CBAE;
+    width: $base-unit * 6;
+    height: $base-unit;
+    position: relative;
+    top: $half-base-unit * 7;
+}
+
+.pie-chart-container {
+	position: relative;
+	left: -1 * $base-unit;
+	top: $base-margin;
 }

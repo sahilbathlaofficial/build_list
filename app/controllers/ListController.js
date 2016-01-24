@@ -16,7 +16,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				state: StateEnum.PENDING,
 				metrics: { value: 0, colorCode: 'green', title: 'Metrics'},
 				build: { value: 0, colorCode: 'green', title: 'Build'},
-				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test'},
+				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test', coverageValue: 0, passedValue: 0 },
 				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test'}
 			},
 			{
@@ -28,7 +28,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				state: StateEnum.RUNNING,
 				metrics: { value: 0.5, colorCode: 'green', title: 'Metrics'},
 				build: { value: 0, colorCode: 'green', title: 'Build'},
-				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test'},
+				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test', coverageValue: 0, passedValue: 0 },
 				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test'}
 			},
 			{
@@ -40,7 +40,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				state: StateEnum.REJECTED,
 				metrics: { value: -1, colorCode: 'red', title: 'Metrics'},
 				build: { value: 0, colorCode: 'green', title: 'Build'},
-				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test'},
+				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test', coverageValue: 76, passedValue: 73 },
 				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test'}
 			},
 			{
@@ -52,7 +52,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				state: StateEnum.COMPLETED,
 				metrics: { value: 1, colorCode: 'green', title: 'Metrics'},
 				build: { value: 1, colorCode: 'green', title: 'Build'},
-				unitTest: { value: 1, colorCode: 'green', title: 'Unit Test'},
+				unitTest: { value: 1, colorCode: 'green', title: 'Unit Test', coverageValue: 92, passedValue: 90 },
 				functionalTest: { value: 1, colorCode: 'green', title: 'Functional Test'}
 			}
 		]
@@ -82,6 +82,48 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 
 		//Move to constants
 		$scope.baseUnitValue = 32;
+
+
+		//Move to a service that renders charts
+		$scope.renderChart = function (id) {
+			 CanvasJS.addColorSet('customColorSet',
+			[
+				'#72AC4D',
+				'#EB7D3B'
+			]);
+
+			var chart = new CanvasJS.Chart('unitChartContainer' + id,
+			{
+				colorSet: 'customColorSet',
+				animationEnabled: true,
+				legend: {
+					verticalAlign: 'top',
+					horizontalAlign: 'left'
+				},
+				height: 120,
+				backgroundColor: null,
+				margin: 0,
+				data: [
+					{
+						type: 'pie',
+						indexLabelFontFamily: 'Garamond',
+						indexLabelFontSize: 10,
+						indexLabelFontWeight: 'bold',
+						startAngle:40,
+						indexLabelFontColor: 'MistyRose',
+						indexLabelLineColor: 'darkgrey',
+						indexLabelPlacement: 'inside',
+						indexLabel: '#percent%',
+						showInLegened: true,
+						dataPoints: [
+							{  y: $scope.buildData[id - 1].unitTest.passedValue, name: 'Tests Passed'},
+							{  y: 100 - $scope.buildData[id - 1].unitTest.passedValue, name: 'Tests Failed'},
+						]
+					}
+				]
+			});
+			chart.render();
+		};
 	}
 
 	ListController.$inject = ['$scope'];
