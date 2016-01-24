@@ -7,10 +7,54 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 
 		//Fake initial data fetched from backend
 		$scope.buildData = [
-			{ id: 1, type: 'build', name: 'Tenrox-R1_1235', owner: '', timeStarted: '', state: StateEnum.PENDING, metricsValue: 0, buildValue: 0, unitValue: 0, functionalValue: 0 },
-			{ id: 2, type: 'firewall',  name: '432462', owner: 'jtuck', timeStarted: '4/18/2014 12:12pm', state: StateEnum.RUNNING, metricsValue: 0.5, buildValue: 0, unitValue: 0, functionalValue: 0 },
-			{ id: 3, type: 'firewall',  name: '432461', owner: 'samy', timeStarted: '4/18/2014 10:53am', state: StateEnum.REJECTED, metricsValue: -1, buildValue: 1, unitValue: 1, functionalValue: 1 },
-			{ id: 4, type: 'build',  name: 'Tenrox-R1_1234', owner: '', timeStarted: '4/17/2014 9:42am', state: StateEnum.COMPLETED, metricsValue: 1, buildValue: 1, unitValue: 1, functionalValue: 1 }
+			{
+				id: 1,
+				type: 'build',
+				name: 'Tenrox-R1_1235',
+				owner: '',
+				timeStarted: '',
+				state: StateEnum.PENDING,
+				metrics: { value: 0, colorCode: 'green', title: 'Metrics'},
+				build: { value: 0, colorCode: 'green', title: 'Build'},
+				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test'},
+				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test'}
+			},
+			{
+				id: 2,
+				type: 'firewall',
+				name: '432462',
+				owner: 'jtuck',
+				timeStarted: '4/18/2014 12:12pm',
+				state: StateEnum.RUNNING,
+				metrics: { value: 0.5, colorCode: 'green', title: 'Metrics'},
+				build: { value: 0, colorCode: 'green', title: 'Build'},
+				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test'},
+				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test'}
+			},
+			{
+				id: 3,
+				type: 'firewall',
+				name: '432461',
+				owner: 'samy',
+				timeStarted: '4/18/2014 10:53am',
+				state: StateEnum.REJECTED,
+				metrics: { value: -1, colorCode: 'red', title: 'Metrics'},
+				build: { value: 0, colorCode: 'green', title: 'Build'},
+				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test'},
+				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test'}
+			},
+			{
+				id: 4,
+				type: 'build',
+				name: 'Tenrox-R1_1234',
+				owner: '',
+				timeStarted: '4/17/2014 9:42am',
+				state: StateEnum.COMPLETED,
+				metrics: { value: 1, colorCode: 'green', title: 'Metrics'},
+				build: { value: 1, colorCode: 'green', title: 'Build'},
+				unitTest: { value: 1, colorCode: 'green', title: 'Unit Test'},
+				functionalTest: { value: 1, colorCode: 'green', title: 'Functional Test'}
+			}
 		]
 
 		$scope.StateEnum = StateEnum;
@@ -34,7 +78,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 			currentBuild: undefined
 		};
 
-		$scope.stepValues = ['metricsValue', 'buildValue', 'unitValue', 'functionalValue'];
+		$scope.stepValues = ['metrics', 'build', 'unitTest', 'functionalTest'];
 
 		//Move to constants
 		$scope.baseUnitValue = 32;

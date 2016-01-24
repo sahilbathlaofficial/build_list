@@ -20,6 +20,16 @@ $green: #EEF3EC;
 $green-text: #548039;
 $green-border: #548039;
 
+.red-box {
+	border: 2px solid $red-border;
+	color: $red-text;
+}
+
+.green-box {
+	border: 2px solid $green-border;
+	color: $green-text;
+}
+
 /* Units */
 $base-unit: 32px;
 $half-base-unit: $base-unit / 2;
@@ -29,9 +39,10 @@ $medium-font-size: $base-font-size - 2px;
 $milli-font-size: $medium-font-size - 2px;
 $micro-font-size: $milli-font-size - 2px;
 
-/* Margins */
+/* Margins & Paddings */
 
 $base-margin: $half-base-unit / 2;
+$base-padding: $base-margin;
 
 
 /*Lists*/

@@ -14,7 +14,8 @@ ul.nav {
 		&.state-description {
 			@include state-box;
 			@include box-shadow(rgba(black, 0.4) 2px 5px 10px);
-			border: 2px solid $green-border;
+			padding: $base-padding;
+			font-weight: bold;
 		}
 		&.build-result {
 			@include state-box;
@@ -27,11 +28,15 @@ ul.nav {
 	}
 	&.expanded-details {
 		opacity: 0;
+		/* hack to fix pointer events, can't use pointer-events due to browser compatability */
+		position: fixed;
+		bottom: 0px;
 		&.visible {
 			@include transition-property(opacity);
 			@include transition-duration(2s);
-			transition-delay: 0.5s;
+			transition-delay: 0.3s;
 			opacity: 1;
+			position: initial;
 		}
 	}
 }
