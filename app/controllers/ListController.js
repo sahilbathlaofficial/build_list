@@ -14,7 +14,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				owner: '',
 				timeStarted: '',
 				state: StateEnum.PENDING,
-				metrics: { value: 0, colorCode: 'green', title: 'Metrics'},
+				metrics: { value: 0, colorCode: 'green', title: 'Metrics', test: 0, maintainabilty: 0, security: 0, workmanship: 0},
 				build: { value: 0, colorCode: 'green', title: 'Build'},
 				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test', coverageValue: 0, passedValue: 0 },
 				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test', coverageValue: 0, passedValue: 0 }
@@ -26,7 +26,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				owner: 'jtuck',
 				timeStarted: '4/18/2014 12:12pm',
 				state: StateEnum.RUNNING,
-				metrics: { value: 0.5, colorCode: 'green', title: 'Metrics'},
+				metrics: { value: 0.5, colorCode: 'green', title: 'Metrics', test: 30, maintainabilty: 32, security: 0, workmansip: 0},
 				build: { value: 0, colorCode: 'green', title: 'Build'},
 				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test', coverageValue: 0, passedValue: 0 },
 				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test', coverageValue: 0, passedValue: 0 }
@@ -38,7 +38,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				owner: 'samy',
 				timeStarted: '4/18/2014 10:53am',
 				state: StateEnum.REJECTED,
-				metrics: { value: -1, colorCode: 'red', title: 'Metrics'},
+				metrics: { value: -1, colorCode: 'red', title: 'Metrics', test: 64, maintainabilty: 50, security: 64, workmanship: 72},
 				build: { value: 1, colorCode: 'green', title: 'Build'},
 				unitTest: { value: 1, colorCode: 'green', title: 'Unit Test', coverageValue: 76, passedValue: 73 },
 				functionalTest: { value: 1, colorCode: 'green', title: 'Functional Test', coverageValue: 0, passedValue: 0 }
@@ -50,7 +50,7 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				owner: '',
 				timeStarted: '4/17/2014 9:42am',
 				state: StateEnum.COMPLETED,
-				metrics: { value: 1, colorCode: 'green', title: 'Metrics'},
+				metrics: { value: 1, colorCode: 'green', title: 'Metrics', test: 64, maintainabilty: 53, security: 64, workmanship: 72},
 				build: { value: 1, colorCode: 'green', title: 'Build'},
 				unitTest: { value: 1, colorCode: 'green', title: 'Unit Test', coverageValue: 92, passedValue: 90 },
 				functionalTest: { value: 1, colorCode: 'green', title: 'Functional Test', coverageValue: 99, passedValue: 92 }
@@ -86,6 +86,9 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 
 		//Move to a service that renders charts
 		$scope.renderChart = function (id) {
+			if ($scope.buildData[id - 1].state === StateEnum.PENDING || $scope.buildData[id - 1].state === StateEnum.RUNNING) {
+				return;
+			}
 			 CanvasJS.addColorSet('customColorSet',
 			[
 				'#72AC4D',

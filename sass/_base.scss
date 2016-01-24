@@ -15,6 +15,7 @@ $grey: #EDF1F8;
 $blue: #EEF3F9;
 $blue-text: #5C90BD;
 $blue-border: #5C90BD;
+$blue-button: #5E9CD3;
 
 $green: #EEF3EC;
 $green-text: #548039;
@@ -48,6 +49,14 @@ $nano-font-size: $micro-font-size - 2px;
 	font-size: $nano-font-size;
 }
 
+/* Buttons */
+
+.action {
+	background-color: $blue-button;
+	color: white;
+	width: 100%;
+}
+
 /* Margins & Paddings */
 
 $base-margin: $half-base-unit / 2;
@@ -55,6 +64,10 @@ $base-padding: $base-margin;
 
 .push-top--double {
 	margin-top: 2 * $base-unit;
+}
+
+.push-left {
+	margin-left: $base-unit;
 }
 
 /*Lists*/

@@ -25,28 +25,36 @@
 			<li class="state-description {{ build.build.colorCode }}-box">{{ build.build.title }}</li>
 			<!-- Start Unit Test Block -->
 			<li class="state-description {{ build[testType].colorCode }}-box" ng-repeat="testType in ['unitTest', 'functionalTest']">
-				<div id="{{testType}}ChartContainer{{ build.id }}" class="pie-chart-container"></div>
-				<div class="width-30 float-right wrap push-top--double">
-					<span class="headline-size">{{ build[testType].passedValue }} %</span>
-					<span class="color-black nano-font-size">Tests Passed</span>
-				</div>
-				<div>{{ build[testType].title }}</div>
-				<div class="test-progress">
-					<div class="code-coverage-details color-black float-right">
-						<div>{{ build[testType].coverageValue }}%</div>
-						<div class="nano-font-size">code covered</div>
+				<div ng-if="build.state !== StateEnum.PENDING && build.state !== StateEnum.RUNNING">
+					<div id="{{testType}}ChartContainer{{ build.id }}" class="pie-chart-container"></div>
+					<div class="width-30 float-right wrap push-top--double">
+						<span class="headline-size">{{ build[testType].passedValue }} %</span>
+						<span class="color-black nano-font-size">Tests Passed</span>
 					</div>
-					<svg width="160" ng-attr-height="{{ baseUnitValue }}">
-						<rect ng-attr-width="{{ build[testType].coverageValue * 2 }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#72AC4D;stroke-width:3;stroke:#72AC4D" />
-					</svg>
+					<div>{{ build[testType].title }}</div>
+					<div class="test-progress">
+						<div class="code-coverage-details color-black float-right">
+							<div>{{ build[testType].coverageValue }}%</div>
+							<div class="nano-font-size">code covered</div>
+						</div>
+						<svg width="160" ng-attr-height="{{ baseUnitValue }}">
+							<rect ng-attr-width="{{ build[testType].coverageValue * 2 }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#72AC4D;stroke-width:3;stroke:#72AC4D" />
+						</svg>
+					</div>
+				</div>
+				<div ng-if="build.state === StateEnum.PENDING || build.state === StateEnum.RUNNING" class="push-top--double push-left">
+					Waiting for data ...
 				</div>
 			</li>
 			<!-- End Unit Test Block -->
 			<li class="build-result">
 				<div class="color-black height-20">Result:</div>
 				<div class="height-20">Change {{ build.state }}</div>
-				<div class="height-20">
-					<button>Find Issues</button>
+				<div class="height-20" ng-if="build.state === StateEnum.REJECTED">
+					<button class="action">Find Issues</button>
+				</div>
+				<div class="height-20" ng-if="build.state === StateEnum.COMPLETED">
+					<button class="action">Deploy to Production</button>
 				</div>
 			</li>
 		</ul>
