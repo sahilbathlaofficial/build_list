@@ -12,6 +12,48 @@ $grey-border: #D5D5D7;
 $grey-text: #95959B;
 $grey: #EDF1F8;
 
+$blue: #EEF3F9;
+$blue-text: #5C90BD;
+$blue-border: #5C90BD;
+
+$green: #EEF3EC;
+$green-text: #548039;
+$green-border: #548039;
+
 /* Units */
-$base-unit: 24px;
+$base-unit: 32px;
 $half-base-unit: $base-unit / 2;
+
+/*Fonts*/
+$medium-font-size: $base-font-size - 2px;
+$milli-font-size: $medium-font-size - 2px;
+$micro-font-size: $milli-font-size - 2px;
+
+
+/*Lists*/
+$color-map: (
+	red: $red,
+	grey: $grey,
+	blue: $blue,
+	green: $green
+);
+
+$text-color-map: (
+	red: $red-text,
+	grey: $grey-text,
+	blue: $blue-text,
+	green: $green-text
+);
+
+$border-color-map: (
+	red: $red-border,
+	grey: $grey-border,
+	blue: $blue-border,
+	green: $green-border,
+);
+
+@mixin base-li-style {
+	display: inline-block;
+	width: $base-unit * 4;
+	overflow: hidden;
+}

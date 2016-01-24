@@ -1,44 +1,52 @@
 @import 'base';
 
-
 ul.nav {
-	margin: 0;
+	margin: 0 0 $half-base-unit/2 0;
 	padding: 0;
-	margin-bottom: $half-base-unit;
 	li {
-		display: table-cell;
-		width: $base-unit * 6;
-		max-width: $base-unit * 6;
-		overflow: hidden;
+		@include base-li-style;
+		&.step-progress {
+			background-color: $grey-border;
+			width: $base-unit + $half-base-unit;
+			margin: $half-base-unit / 4 ($base-unit * 2 + $half-base-unit) 0 0;
+		}
 	}
 	&.attributes-row {
-		margin-left: $half-base-unit;
+		margin-left: $base-unit * 2;
 	}
 }
 
 
-.build-data li {
-	font-size: $half-base-unit;
-	padding: $half-base-unit 0;
+.build-data {
+	li {
+		font-size: $medium-font-size;
+		margin: $half-base-unit / 4 0;
+		&.build-type {
+			width: $base-unit;
+			margin: $half-base-unit / 4;
+			border: 2px solid grey;
+			height: $half-base-unit;
+		}
+	}
+}
+
+@each $color, $colorValue in $border-color-map {
+	.build-type--#{"" + $color} {
+		background-color: $colorValue;
+	}
+
+	.build-row--#{"" + $color} {
+		color: map-get($text-color-map, $color);
+		border: 2px solid $colorValue;
+		@include background-image(linear-gradient(to right, map-get($color-map, $color), white));
+	}
 }
 
 .container {
-	min-width: 800px;
+	min-width: $base-unit * 30;
 	display: table;
 	font-family: sans-serif;
 	white-space: nowrap;
 	background-color: $grey-color-light;
 	padding: $half-base-unit;
-}
-
-.build-row--grey {
-	color: $grey-text;
-	border: 2px solid $grey-border;
-	background: $grey
-}
-
-.build-row--red {
-	color: $red-text;
-	border: 2px solid $red-border;
-	background: $red
 }

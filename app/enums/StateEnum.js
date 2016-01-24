@@ -4,7 +4,8 @@ define('enums/StateEnum', ['app'], function (app) {
 	return {
 		PENDING: 'Pending',
 		RUNNING: 'Running',
-		COMPLETE: 'Complete',
-		REJECTED: 'Rejected'
+		COMPLETED: 'Complete',
+		REJECTED: 'Rejected',
+		ACCEPTED: 'Accepted'
 	};
 });
