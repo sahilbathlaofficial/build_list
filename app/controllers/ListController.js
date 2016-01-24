@@ -30,6 +30,10 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 			}
 		};
 
+		$scope.buildInfo = {
+			currentBuild: undefined
+		};
+
 		$scope.stepValues = ['metricsValue', 'buildValue', 'unitValue', 'functionalValue'];
 
 		//Move to constants

@@ -8,22 +8,50 @@ ul.nav {
 		&.step-progress {
 			background-color: $grey-border;
 			width: $base-unit + $half-base-unit;
-			margin: $half-base-unit / 4 ($base-unit * 2 + $half-base-unit) 0 0;
+			margin: $base-margin ($base-unit * 2 + $half-base-unit) 0 0;
+			height: $base-unit
+		}
+		&.state-description {
+			@include state-box;
+			@include box-shadow(rgba(black, 0.4) 2px 5px 10px);
+			border: 2px solid $green-border;
+		}
+		&.build-result {
+			@include state-box;
+			text-align: center;
+			height: $base-unit * 4;
 		}
 	}
 	&.attributes-row {
 		margin-left: $base-unit * 2;
 	}
+	&.expanded-details {
+		opacity: 0;
+		&.visible {
+			@include transition-property(opacity);
+			@include transition-duration(2s);
+			transition-delay: 0.5s;
+			opacity: 1;
+		}
+	}
 }
 
 
 .build-data {
+	@include transition-property(height);
+	@include transition-duration(1s);
+	&.expanded {
+		height: $base-unit * 8;
+	}
+	&.collapsed {
+		height: $base-unit + $half-base-unit;
+	}
 	li {
 		font-size: $medium-font-size;
-		margin: $half-base-unit / 4 0;
+		margin: $base-margin 0;
 		&.build-type {
 			width: $base-unit;
-			margin: $half-base-unit / 4;
+			margin: $base-margin;
 			border: 2px solid grey;
 			height: $half-base-unit;
 		}

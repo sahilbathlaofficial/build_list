@@ -4,7 +4,7 @@
 			{{ attribute }}
 		</li>
 	</ul>
-	<ul class="nav build-data" ng-repeat="build in buildData" ng-class="'build-row--' + getColor(build.state)">
+	<ul class="nav build-data {{'build-row--' + getColor(build.state)}}" ng-repeat="build in buildData" ng-class="{ expanded: buildInfo.currentBuild === build, collapsed: buildInfo.currentBuild !== build }" ng-click="buildInfo.currentBuild = buildInfo.currentBuild === build ? undefined : build">
 		<li class="build-type" ng-class="['build-type--' + getColor(build.state), build.type]">
 			<div ></div>
 		</li>
@@ -13,11 +13,24 @@
 		<li>{{ build.timeStarted }}</li>
 		<li>{{ build.state }}</li>
 		<li class="step-progress" ng-repeat="stepValue in stepValues">
-			<svg width="80" height="30">
-				<rect width="{{ build[stepValue] * 1.5 * baseUnitValue }}" height="30" style="fill:#5E9CD3;stroke-width:3;stroke:#5E9CD3" ng-if="build.state === StateEnum.RUNNING && (build[stepValue] > 0  && build[stepValue] < 1)" />
-				<rect width="{{ build[stepValue] * 1.5 * baseUnitValue }}" height="30" style="fill:#548039;stroke-width:3;stroke:#548039" ng-if="build.state !== StateEnum.RUNNING && (build[stepValue] === 1)" />
-				<rect width="{{ build[stepValue] * -1.5 * baseUnitValue }}" height="30" style="fill:#BE0712;stroke-width:3;stroke:#BE0712" ng-if="build.state !== StateEnum.RUNNING && (build[stepValue] === -1)" />
+			<svg width="80" ng-attr-height="{{ baseUnitValue }}">
+				<rect ng-attr-width="{{ build[stepValue] * 1.5 * baseUnitValue }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#5E9CD3;stroke-width:3;stroke:#5E9CD3" ng-if="build.state === StateEnum.RUNNING && (build[stepValue] > 0  && build[stepValue] < 1)" />
+				<rect ng-attr-width="{{ build[stepValue] * 1.5 * baseUnitValue }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#548039;stroke-width:3;stroke:#548039" ng-if="build.state !== StateEnum.RUNNING && (build[stepValue] === 1)" />
+				<rect ng-attr-width="{{ build[stepValue] * -1.5 * baseUnitValue }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#BE0712;stroke-width:3;stroke:#BE0712" ng-if="build.state !== StateEnum.RUNNING && (build[stepValue] === -1)" />
 			</svg>
 		</li>
+		<ul class="nav expanded-details" ng-class="{ 'visible': buildInfo.currentBuild === build }">
+			<li class="state-description"></li>
+			<li class="state-description"></li>
+			<li class="state-description"></li>
+			<li class="state-description"></li>
+			<li class="build-result">
+				<div class="color-black height-20">Result:</div>
+				<div class="height-20">Change {{ build.state }}</div>
+				<div class="height-20">
+					<button>Find Issues</button>
+				</div>
+			</li>
+		</ul>
 	</ul>
 </div>

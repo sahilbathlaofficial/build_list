@@ -29,6 +29,10 @@ $medium-font-size: $base-font-size - 2px;
 $milli-font-size: $medium-font-size - 2px;
 $micro-font-size: $milli-font-size - 2px;
 
+/* Margins */
+
+$base-margin: $half-base-unit / 2;
+
 
 /*Lists*/
 $color-map: (
@@ -52,8 +56,24 @@ $border-color-map: (
 	green: $green-border,
 );
 
+.color-black {
+	color: black;
+}
+
+/*Mixins*/
 @mixin base-li-style {
 	display: inline-block;
 	width: $base-unit * 4;
 	overflow: hidden;
+}
+
+@mixin state-box {
+	height: $base-unit * 5;
+	width: $base-unit * 5;
+	margin: $base-margin * 2;
+}
+
+/* Heights */
+.height-20 {
+	height: 20%;
 }
