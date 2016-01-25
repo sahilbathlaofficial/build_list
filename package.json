@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Sahil Batla",
   "scripts": {
-  	"start": "node_modules/.bin/http-server"
+  	"start": "compass compile; node_modules/.bin/http-server"
   },
   "devDependencies": {
     "bower": "~1.3",
