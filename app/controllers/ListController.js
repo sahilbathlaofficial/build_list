@@ -1,11 +1,11 @@
 define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, StateEnum) {
 	'use strict';
 
-	function ListController($scope) {
+	function ListController($scope, $timeout) {
 		//In Real World :- Fetch from backend and set it here
 		$scope.attributes = ['Changelist/Build', 'Owner', 'Time Started', 'State', 'Metrics', 'Build', 'Unit Test', 'Functional Test'];
 
-		//Fake initial data fetched from backend
+		//Fake initial data fetched from backend using $http
 		$scope.buildData = [
 			{
 				id: 1,
@@ -28,10 +28,10 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				startTime: '12:12pm',
 				startDate: '4/18/2014',
 				state: StateEnum.RUNNING,
-				metrics: { value: 0.5, colorCode: 'green', title: 'Metrics', test: 30, maintainabilty: 32, security: 0, status: 'up', workmanship: 0},
+				metrics: { value: 0.5, colorCode: 'green', title: 'Metrics', test: 30, maintainabilty: 32, security: 64, status: 'up', workmanship: 72},
 				build: { value: 0, colorCode: 'green', title: 'Build'},
-				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test', coverageValue: 0, passedValue: 0 },
-				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test', coverageValue: 0, passedValue: 0 }
+				unitTest: { value: 0, colorCode: 'green', title: 'Unit Test', coverageValue: 88, passedValue: 87 },
+				functionalTest: { value: 0, colorCode: 'green', title: 'Functional Test', coverageValue: 82, passedValue: 78 }
 			},
 			{
 				id: 3,
@@ -68,6 +68,18 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 		//Move to constants
 		$scope.baseUnitValue = 32;
 
+		/* Private Methods */
+
+		/**
+		 * Handler when the build has finished executing
+		 * @param  {buildIndex} buildIndex is the index of build
+		 */
+		function finishExecution(buildIndex) {
+			$scope.buildData[buildIndex].state = StateEnum.COMPLETED;
+			$timeout(function() {
+				$scope.renderChart($scope.buildData[buildIndex].id);
+			}, 200);
+		}
 
 		/* Public Methods */
 
@@ -150,9 +162,30 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				chart.render();
 			}
 		};
+
+		/**
+		 * Fake updateData mocking polling/pushing on server
+		 * Just completing the state of running build id:2, index:1 -> hardcoded for demo
+		 */
+		$scope.updateData = function (index) {
+			var valuesToUpdate = $scope.stepValues;
+			$timeout(function () {
+				if (Number($scope.buildData[1][valuesToUpdate[index]].value.toFixed(1)) === 1) {
+					index++;
+				}
+				if (index > 3) {
+					finishExecution(1);
+					return;
+				}
+				$scope.buildData[1][valuesToUpdate[index]].value += 0.1;
+				$scope.buildData[1][valuesToUpdate[index]].value = Number($scope.buildData[1][valuesToUpdate[index]].value.toFixed(1));
+				$scope.updateData(index);
+			}, 1000);
+		};
+		$scope.updateData(0);
 	}
 
-	ListController.$inject = ['$scope'];
+	ListController.$inject = ['$scope', '$timeout'];
 
 	app.controller('ListController', ListController);
 });

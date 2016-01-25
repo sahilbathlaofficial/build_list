@@ -18,9 +18,9 @@
 		<li>{{ build.state }}</li>
 		<li class="step-progress" ng-repeat="stepValue in stepValues">
 			<svg width="80" ng-attr-height="{{ baseUnitValue }}">
-				<rect ng-attr-width="{{ build[stepValue].value * 1.5 * baseUnitValue }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#5E9CD3;stroke-width:3;stroke:#5E9CD3" ng-if="build.state === StateEnum.RUNNING && (build[stepValue].value > 0  && build[stepValue].value < 1)" />
-				<rect ng-attr-width="{{ build[stepValue].value * 1.5 * baseUnitValue }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#548039;stroke-width:3;stroke:#548039" ng-if="build.state !== StateEnum.RUNNING && (build[stepValue].value === 1)" />
-				<rect ng-attr-width="{{ build[stepValue].value * -1.5 * baseUnitValue }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#BE0712;stroke-width:3;stroke:#BE0712" ng-if="build.state !== StateEnum.RUNNING && (build[stepValue].value === -1)" />
+				<rect ng-attr-width="{{ build[stepValue].value * 1.5 * baseUnitValue }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#5E9CD3;stroke-width:3;stroke:#5E9CD3" ng-if="(build[stepValue].value > 0  && build[stepValue].value < 1)" />
+				<rect ng-attr-width="{{ build[stepValue].value * 1.5 * baseUnitValue }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#548039;stroke-width:3;stroke:#548039" ng-if="(build[stepValue].value === 1)" />
+				<rect ng-attr-width="{{ build[stepValue].value * -1.5 * baseUnitValue }}" ng-attr-height="{{ baseUnitValue }}" style="fill:#BE0712;stroke-width:3;stroke:#BE0712" ng-if="(build[stepValue].value === -1)" />
 			</svg>
 		</li>
 		<ul class="nav expanded-details" ng-class="{ 'visible': buildInfo.currentBuild === build }">
