@@ -21,6 +21,7 @@ ul.nav {
 		&.state-description {
 			@include state-box;
 			@include box-shadow(rgba(black, 0.4) 2px 5px 10px);
+			@include hand-cursor;
 			padding: $base-padding;
 			font-weight: bold;
 			text-align: left;
@@ -44,7 +45,7 @@ ul.nav {
 			@include transition-duration(2s);
 			transition-delay: 0.3s;
 			opacity: 1;
-			position: initial;
+			position: static;
 		}
 	}
 }
@@ -94,6 +95,21 @@ ul.nav {
 	padding: $half-base-unit;
 }
 
+.modal-container {
+	position: fixed;
+	top: 20%;
+	left: 30%;
+	background-color: white;
+	border-radius: 5px;
+	width: 500px;
+	min-height: 300px;
+	padding: $half-base-unit;
+	font-family: sans-serif;
+    color: grey;
+    /* To override any other element */
+    z-index:10000
+}
+
 .soft {
 	padding: 10px;
 }
@@ -131,12 +147,6 @@ ul.nav {
 .soft-sides { padding: 0 20px; }
 .soft-semi--sides { padding: 0 30px; }
 
-.push-semi--top { margin-top: 30px; }
-.push-quarter--top { margin-top: 5px; }
-.push--top { margin-top: 20px; }
-.push-half--top { margin-top: 10px; }
-.push-quarter--bottom { margin-bottom: 5px; }
-
 .one-half { width: 45%; }
 
 .full-width { width: 100%; }
@@ -156,7 +166,7 @@ ul.nav {
 	    position: relative;
 	    bottom: 20px;
 	    left: $half-base-unit / 8;
-	    width: $half-base-unit;
+	    width: $half-base-unit + 5px;
 	    overflow: hidden;
 	}
 }
@@ -184,7 +194,7 @@ ul.nav {
 	    position: relative;
 	    bottom: 10px;
 	    left: $half-base-unit / 8;
-	    width: $half-base-unit;
+	    width: $half-base-unit + 5px;
 	    overflow: hidden;
 	}
 }

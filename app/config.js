@@ -3,6 +3,7 @@ require.config({
 	paths: {
 		'angular': '../bower_components/angular/angular',
 		'angular-route': '../bower_components/angular-route/angular-route',
+		'text' : "../bower_components/requirejs-text/text"
 	},
 	shim: {
 		'angular' : { exports : 'angular' },
@@ -10,7 +11,7 @@ require.config({
 	}
 });
 
-requirejs(['app', 'angular', 'controllers/ListController'], function (app, angular, ListController) {
+requirejs(['app', 'angular', 'controllers/ListController', 'directives/ModalBoxDirective'], function (app, angular, ListController) {
 	'use strict';
 
 	/* Handle Routes */

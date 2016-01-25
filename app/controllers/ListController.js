@@ -12,7 +12,8 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				type: 'build',
 				name: 'Tenrox-R1_1235',
 				owner: '',
-				timeStarted: '',
+				startTime: '',
+				startDate: '',
 				state: StateEnum.PENDING,
 				metrics: { value: 0, colorCode: 'green', title: 'Metrics', test: 0, maintainabilty: 0, security: 0, status: 'up', workmanship: 0},
 				build: { value: 0, colorCode: 'green', title: 'Build'},
@@ -24,7 +25,8 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				type: 'firewall',
 				name: '432462',
 				owner: 'jtuck',
-				timeStarted: '4/18/2014 12:12pm',
+				startTime: '12:12pm',
+				startDate: '4/18/2014',
 				state: StateEnum.RUNNING,
 				metrics: { value: 0.5, colorCode: 'green', title: 'Metrics', test: 30, maintainabilty: 32, security: 0, status: 'up', workmanship: 0},
 				build: { value: 0, colorCode: 'green', title: 'Build'},
@@ -36,7 +38,8 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				type: 'firewall',
 				name: '432461',
 				owner: 'samy',
-				timeStarted: '4/18/2014 10:53am',
+				startTime: '10:53am',
+				startDate: '4/18/2014',
 				state: StateEnum.REJECTED,
 				metrics: { value: -1, colorCode: 'red', title: 'Metrics', test: 64, maintainabilty: 50, security: 64, status: 'down', workmanship: 72},
 				build: { value: 1, colorCode: 'green', title: 'Build'},
@@ -48,7 +51,8 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 				type: 'build',
 				name: 'Tenrox-R1_1234',
 				owner: '',
-				timeStarted: '4/17/2014 9:42am',
+				startTime: '9:42am',
+				startDate: '4/17/2014',
 				state: StateEnum.COMPLETED,
 				metrics: { value: 1, colorCode: 'green', title: 'Metrics', test: 64, maintainabilty: 53, security: 64, status: 'up', workmanship: 72},
 				build: { value: 1, colorCode: 'green', title: 'Build'},
@@ -83,6 +87,12 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 		//Move to constants
 		$scope.baseUnitValue = 32;
 
+		$scope.showModal = function (event) {
+			event.stopPropagation();
+			$scope.isModalShown = true;
+		};
+
+		$scope.modalContent = 'Here you add more info about your builds.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur faucibus lacus est, quis iaculis eros placerat nec. Donec posuere, urna nec convallis faucibus, sapien nibh tincidunt sapien, a dignissim sapien odio ac nibh. Donec ultrices non velit ac hendrerit. Nullam.';
 
 		//Move to a service that renders charts
 		$scope.renderChart = function (id) {

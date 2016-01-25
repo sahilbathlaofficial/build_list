@@ -1,3 +1,6 @@
+<modal-box data-title="Some relevant information" data-content="{{ modalContent }}" data-on-close="$scope.isModalShown = false" data-control-variable="isModalShown">
+	<div>{{ content }} </div>
+</modal-box>
 <div class="container">
 	<ul class="nav attributes-row">
 		<li ng-repeat="attribute in attributes">
@@ -11,7 +14,7 @@
 			<div class="soft-half">{{ build.name }}</div>
 		</li>
 		<li>{{ build.owner }}</li>
-		<li>{{ build.timeStarted }}</li>
+		<li>{{ build.startDate }} {{build.startTime}}</li>
 		<li>{{ build.state }}</li>
 		<li class="step-progress" ng-repeat="stepValue in stepValues">
 			<svg width="80" ng-attr-height="{{ baseUnitValue }}">
@@ -27,7 +30,7 @@
 			<div ng-if="build.state === StateEnum.RUNNING" class="push-top--double push-left">
 					Running your build, Please wait ...
 			</div>
-			<li class="state-description {{ build.metrics.colorCode }}-box" ng-if="build.state !== StateEnum.PENDING && build.state !== StateEnum.RUNNING">
+			<li class="state-description {{ build.metrics.colorCode }}-box" ng-if="build.state !== StateEnum.PENDING && build.state !== StateEnum.RUNNING" ng-click="showModal($event)">
 				<div class="full-width">{{ build.metrics.title }}</div>
 
 				<div class="full-width" style="height:70px;">
@@ -62,7 +65,7 @@
 				</div>
 			</li>
 
-			<li class="state-description {{ build.build.colorCode }}-box" ng-if="build.state !== StateEnum.PENDING && build.state !== StateEnum.RUNNING">
+			<li class="state-description {{ build.build.colorCode }}-box" ng-if="build.state !== StateEnum.PENDING && build.state !== StateEnum.RUNNING" ng-click="showModal($event)">
 				<div class="full-width  push-quarter--bottom">{{ build.build.title }}</div>
 				<div class="push-half--top">
 					<div class="one-half  soft-sides  soft-half--top  float--left">
@@ -74,11 +77,11 @@
 						<div class="text--blue  push-half--top">Release</div>
 					</div>
 				</div>
-				<div class="text--center  push--top   text--dark">10:35A.M. - 12/12/2015</div>
+				<div class="text--center  push--top   text--dark">{{ build.startTime }} - {{ build.startDate }}</div>
 			</li>
 
 			<!-- Start Unit Test Block -->
-			<li class="state-description {{ build[testType].colorCode }}-box" ng-repeat="testType in ['unitTest', 'functionalTest']" ng-if="build.state !== StateEnum.PENDING && build.state !== StateEnum.RUNNING">
+			<li class="state-description {{ build[testType].colorCode }}-box" ng-repeat="testType in ['unitTest', 'functionalTest']" ng-if="build.state !== StateEnum.PENDING && build.state !== StateEnum.RUNNING" ng-click="showModal($event)">
 				<div id="{{testType}}ChartContainer{{ build.id }}" class="pie-chart-container"></div>
 				<div class="width-30 float-right wrap push-top--double">
 					<div class="headline-size">{{ build[testType].passedValue }} %</div>
@@ -96,14 +99,14 @@
 				</div>
 			</li>
 			<!-- End Unit Test Block -->
-			<li class="build-result" ng-if="build.state !== StateEnum.PENDING && build.state !== StateEnum.RUNNING">
+			<li class="build-result" ng-if="build.state !== StateEnum.PENDING && build.state !== StateEnum.RUNNING" ng-click="showModal($event)">
 				<div class="color-black height-20">Result:</div>
 				<div class="height-20">Change {{ build.state }}</div>
 				<div class="height-20" ng-if="build.state === StateEnum.REJECTED">
-					<button class="action">Find Issues</button>
+					<button class="action" ng-click="showModal($event)">Find Issues</button>
 				</div>
 				<div class="height-20" ng-if="build.state === StateEnum.COMPLETED">
-					<button class="action">Deploy to Production</button>
+					<button class="action" ng-click="showModal($event)">Deploy to Production</button>
 				</div>
 			</li>
 		</ul>

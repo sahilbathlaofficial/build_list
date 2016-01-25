@@ -2,6 +2,24 @@
 
 @import 'compass';
 
+/*Mixins*/
+@mixin base-li-style {
+	display: inline-block;
+	width: 150px;
+	overflow: hidden;
+}
+
+@mixin state-box {
+	height: $base-unit * 5;
+	width: $base-unit * 6;
+	margin: $base-margin * 2;
+}
+
+@mixin hand-cursor {
+	cursor: pointer;
+	cursor: hand;
+}
+
 /* Colors */
 $red: #FBE4E4;
 $red-text: #C73344;
@@ -65,6 +83,12 @@ $nano-font-size: $micro-font-size - 2px;
 	background-color: $blue-button;
 	color: white;
 	width: 100%;
+	min-height: $base-unit;
+	@include hand-cursor;
+	&:focus {
+		box-shadow: none;
+		outline: none;
+	}
 }
 
 /* Margins & Paddings */
@@ -72,13 +96,13 @@ $nano-font-size: $micro-font-size - 2px;
 $base-margin: $half-base-unit / 2;
 $base-padding: $base-margin;
 
-.push-top--double {
-	margin-top: 2 * $base-unit;
-}
-
-.push-left {
-	margin-left: $base-unit;
-}
+.push-top--double { margin-top: 2 * $base-unit; }
+.push-left { margin-left: $base-unit; }
+.push-semi--top { margin-top: $base-unit}
+.push--top { margin-top: 20px; }
+.push-quarter--top { margin-top: 5px; }
+.push-half--top { margin-top: 10px; }
+.push-quarter--bottom { margin-bottom: 5px; }
 
 /*Lists*/
 $color-map: (
@@ -107,19 +131,6 @@ $border-color-map: (
 
 .color-black {
 	color: black;
-}
-
-/*Mixins*/
-@mixin base-li-style {
-	display: inline-block;
-	width: 150px;
-	overflow: hidden;
-}
-
-@mixin state-box {
-	height: $base-unit * 5;
-	width: $base-unit * 6;
-	margin: $base-margin * 2;
 }
 
 /* Heights */
@@ -153,4 +164,19 @@ $border-color-map: (
 h3 {
 	color: white;
 	font-size: $medium-font-size;
+}
+
+.hand-cursor {
+	@include hand-cursor;
+}
+
+.glass {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: black;
+	opacity: 0.6;
+	pointer-events: none;
+	top: 0;
+	left: 0;
 }
