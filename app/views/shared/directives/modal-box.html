@@ -1,0 +1,11 @@
+<div class="glass" ng-if="isOpen">
+</div>
+<div class="modal-container" ng-if="isOpen">
+	<div ng-click="close()" class="float-right hand-cursor bold">
+		<a ng-click="close()" >X</a>
+	</div>
+	<div class="modal-box">
+		<h1 class="height-20 text--center">{{ title }}</h1>
+		<div class="push-top soft">{{ content }} </div>
+	</div>
+</div>

@@ -62,7 +62,21 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 		]
 
 		$scope.StateEnum = StateEnum;
+		$scope.buildInfo = {currentBuild: undefined};
+		$scope.stepValues = ['metrics', 'build', 'unitTest', 'functionalTest'];
+		$scope.modalContent = 'Here you add more info about your builds.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur faucibus lacus est, quis iaculis eros placerat nec. Donec posuere, urna nec convallis faucibus, sapien nibh tincidunt sapien, a dignissim sapien odio ac nibh. Donec ultrices non velit ac hendrerit. Nullam.';
+		//Move to constants
+		$scope.baseUnitValue = 32;
 
+
+		/* Public Methods */
+
+		/**
+		 * getColor -> Get Color as per state (running -> green, rejected -> red) etc
+		 * Todo :- Move to a colors service
+		 * @param  {string} state running, rejected etc
+		 * @return {string}       color string
+		 */
 		$scope.getColor = function (state) {
 			switch (state) {
 				case StateEnum.PENDING:
@@ -78,23 +92,21 @@ define('controllers/ListController', ['app', 'enums/StateEnum'], function (app, 
 			}
 		};
 
-		$scope.buildInfo = {
-			currentBuild: undefined
-		};
-
-		$scope.stepValues = ['metrics', 'build', 'unitTest', 'functionalTest'];
-
-		//Move to constants
-		$scope.baseUnitValue = 32;
-
+		/**
+		 * Shows the dummy modal
+		 * @param  {[type]} event if called on any event i.e. click
+		 */
 		$scope.showModal = function (event) {
 			event.stopPropagation();
 			$scope.isModalShown = true;
 		};
 
-		$scope.modalContent = 'Here you add more info about your builds.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur faucibus lacus est, quis iaculis eros placerat nec. Donec posuere, urna nec convallis faucibus, sapien nibh tincidunt sapien, a dignissim sapien odio ac nibh. Donec ultrices non velit ac hendrerit. Nullam.';
 
-		//Move to a service that renders charts
+		/**
+		 * Renders the pi chart for unit & functional tests of a buil
+		 * ToDo:- Move to a service that deals with charts
+		 * @param  {number} id buildid
+		 */
 		$scope.renderChart = function (id) {
 			if ($scope.buildData[id - 1].state === StateEnum.PENDING || $scope.buildData[id - 1].state === StateEnum.RUNNING) {
 				return;
